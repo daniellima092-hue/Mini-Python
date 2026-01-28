@@ -17,7 +17,7 @@ class MiniPythonLexerTest {
 
     @Test
     void testIndentationIfElse() {
-        // Exemplo 3 [cite: 112-115]
+        // Exemplo 3
         String code = 
             "if x > 0:\n" +
             "    print \"pos\"\n" +
@@ -38,7 +38,7 @@ class MiniPythonLexerTest {
 
     @Test
     void testFloatAndStrings() {
-        // Exemplo 1 extendido [cite: 101, 102]
+        // Exemplo 1 extendido
         String code = "y = 5.5\nz = \"hello\"";
         assertTokens(code,
                 TokenType.IDENTIFIER, TokenType.ASSIGN, TokenType.FLOAT_LITERAL, TokenType.NEWLINE,
@@ -48,7 +48,7 @@ class MiniPythonLexerTest {
 
     @Test
     void testOperatorsAndPrecedenceTokens() {
-        // Exemplo 5 [cite: 124]
+        // Exemplo 5
         String code = "a = (10 + 5) * 2";
         assertTokens(code,
             TokenType.IDENTIFIER, TokenType.ASSIGN, 
@@ -59,7 +59,7 @@ class MiniPythonLexerTest {
     
     @Test
     void testBuiltIns() {
-        // Exemplo 2 [cite: 107]
+        // Exemplo 2
         String code = "x = int(input())";
         assertTokens(code,
             TokenType.IDENTIFIER, TokenType.ASSIGN, 
@@ -96,4 +96,5 @@ class MiniPythonLexerTest {
         Token err = lexer.nextToken(); // $
         assertEquals(TokenType.ERROR, err.type);
     }
+
 }
