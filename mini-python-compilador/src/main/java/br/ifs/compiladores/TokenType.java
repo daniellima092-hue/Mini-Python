@@ -1,36 +1,36 @@
 package br.ifs.compiladores;
 
 public enum TokenType {
-    // Palavras Reservadas e Built-ins [cite: 51, 87-89, 18-23]
+    // Palavras Reservadas e Built-ins
     IF, ELSE, WHILE, PRINT,
     AND, OR, NOT,
     INPUT, INT, FLOAT, // Tratados como tokens específicos para facilitar o parser
 
-    // Identificadores e Literais [cite: 75-80]
+    // Identificadores e Literais
     IDENTIFIER,
     INTEGER_LITERAL,
     FLOAT_LITERAL,
     STRING_LITERAL,
 
-    // Operadores Aritméticos [cite: 41, 43]
+    // Operadores Aritméticos
     PLUS, MINUS, MUL, DIV,  // +, -, *, /
 
-    // Operadores Relacionais [cite: 39]
+    // Operadores Relacionais
     GT, LT, EQ, GTE, LTE, NEQ, // >, <, ==, >=, <=, !=
 
-    // Atribuição e Pontuação [cite: 14, 20]
+    // Atribuição e Pontuação
     ASSIGN,     // =
     LPAREN,     // (
     RPAREN,     // )
     COLON,      // :
     COMMA,      // ,
 
-    // Controle de Estrutura (Indentação Significativa) [cite: 81-84]
+    // Controle de Estrutura (Indentação Significativa)
     NEWLINE,
     INDENT,
     DEDENT,
 
     // Especiais
     EOF,
-    ERROR
+    ERROR, TRUE, FALSE
 }
