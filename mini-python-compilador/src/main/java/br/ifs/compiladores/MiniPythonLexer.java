@@ -14,7 +14,7 @@ public class MiniPythonLexer {
     private int line = 1;
     private int columnStart = 0; // Para rastrear colunas
 
-    // Controle de Indentação [cite: 81-84]
+    // Controle de Indentação
     private final Stack<Integer> indentStack = new Stack<>();
     private final Queue<Token> tokenBuffer = new LinkedList<>();
     private boolean atLineStart = true;
@@ -30,10 +30,11 @@ public class MiniPythonLexer {
         keywords.put("and", TokenType.AND);
         keywords.put("or", TokenType.OR);
         keywords.put("not", TokenType.NOT);
-        // Built-ins como tokens para simplificar parser [cite: 51]
         keywords.put("input", TokenType.INPUT);
         keywords.put("int", TokenType.INT);
         keywords.put("float", TokenType.FLOAT);
+        keywords.put("True", TokenType.TRUE);  
+        keywords.put("False", TokenType.FALSE); 
     }
 
     public MiniPythonLexer(String source) {
@@ -78,7 +79,7 @@ public class MiniPythonLexer {
             return nextToken();
         }
 
-        // Tratamento de Nova Linha [cite: 70]
+        // Tratamento de Nova Linha
         if (c == '\n') {
             line++;
             columnStart = current;
@@ -90,7 +91,7 @@ public class MiniPythonLexer {
 
         atLineStart = false; // Qualquer outro caractere quebra o status de início de linha
 
-        // Comentários [cite: 138] (Ignorados até o fim da linha)
+        // Comentários(Ignorados até o fim da linha)
         if (c == '#') {
             while (peek() != '\n' && !isAtEnd()) advance();
             return nextToken(); // Retorna o próximo token real
@@ -114,17 +115,17 @@ public class MiniPythonLexer {
             case '>': return makeToken(match('=') ? TokenType.GTE : TokenType.GT);
         }
 
-        // Literais de String [cite: 68, 80]
+        // Literais de String
         if (c == '"' || c == '\'') {
             return string(c);
         }
 
-        // Números [cite: 62-67, 76-79]
+        // Números
         if (isDigit(c)) {
             return number();
         }
 
-        // Identificadores e Palavras-chave [cite: 55, 75]
+        // Identificadores e Palavras-chave
         if (isAlpha(c)) {
             return identifier();
         }
@@ -193,7 +194,7 @@ public class MiniPythonLexer {
     private Token number() {
         while (isDigit(peek())) advance();
 
-        // Verifica ponto flutuante [cite: 66, 67]
+        // Verifica ponto flutuante
         if (peek() == '.' && isDigit(peekNext())) {
             advance(); // Consome o '.'
             while (isDigit(peek())) advance();
